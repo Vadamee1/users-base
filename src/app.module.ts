@@ -1,33 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { RouterModule } from '@nestjs/core';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { PrismaModule } from './prisma/prisma.module';
+import { UsersModule } from './modules/users/users.module';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
-  imports: [
-    RouterModule.register([
-      {
-        path: 'api',
-        children: [
-          {
-            path: 'users',
-            module: UsersModule,
-          },
-          {
-            path: 'auth',
-            module: AuthModule,
-          },
-        ],
-      },
-    ]),
-    UsersModule,
-    AuthModule,
-    PrismaModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), UsersModule, AuthModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

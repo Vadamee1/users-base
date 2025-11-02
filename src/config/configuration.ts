@@ -1,0 +1,5 @@
+const { PORT, SALT_ROUNDS, SECRET_JWT_KEY } = process.env;
+
+const PARSED_SALT_ROUNDS = parseInt(SALT_ROUNDS || '10') || 10;
+
+export { PORT, PARSED_SALT_ROUNDS as SALT_ROUNDS, SECRET_JWT_KEY };
