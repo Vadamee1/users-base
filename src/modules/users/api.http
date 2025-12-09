@@ -1,0 +1,20 @@
+### Register crear usuario
+POST http://localhost:3000/api/users
+content-type: application/json
+
+{
+  "username": "test4",
+  "email": "test4@test.com",
+  "password": "123456"
+}
+
+### Obtener datos de un usuario
+GET http://localhost:3000/api/users/9
+
+### Actualizar username de un usuario
+PATCH http://localhost:3000/api/users/9/username
+Content-Type: application/json
+
+{
+  "username": "test 4 4444"
+}

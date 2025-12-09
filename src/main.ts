@@ -2,12 +2,13 @@ import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import cookieParser from 'cookie-parser';
 // import { WsAdapter } from '@nestjs/platform-ws';
 
 async function bootstrap() {
   const apiApp = await NestFactory.create<NestExpressApplication>(AppModule);
   apiApp.disable('x-powered-by');
-  apiApp.enableCors({ origin: '*' });
+  apiApp.use(cookieParser());
   apiApp.setGlobalPrefix('api');
   apiApp.useGlobalPipes(
     new ValidationPipe({

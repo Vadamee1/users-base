@@ -6,18 +6,21 @@ import type { IUserRepository } from '../../domain/ports/user.repository';
 import { ApiResponse } from '../../../../shared/kernel/response.interface';
 import { createResponse } from '../../../../shared/kernel/response.util';
 
+interface User {
+  username: string;
+  email: string;
+  password: string;
+}
+
 @Injectable()
 export class CreateUserUseCase {
   constructor(
     @Inject('UserRepository') private userRepository: IUserRepository,
+
     private configService: ConfigService,
   ) {}
 
-  async execute(user: {
-    username: string;
-    email: string;
-    password: string;
-  }): Promise<ApiResponse<null>> {
+  async execute(user: User): Promise<ApiResponse<null>> {
     const userExists = await this.userRepository.findByEmail(user.email);
 
     if (userExists)
